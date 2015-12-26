@@ -1,3 +1,3 @@
 # sis
 Student Information System 
-add readme 
+how to setup files 
