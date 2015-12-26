@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from courses.forms import CourseForm
+from courses.forms import CourseForm, TopicForm
 
 # Create your views here.
 def index(request):
@@ -11,12 +11,13 @@ def index(request):
     context_dict = {'categories': "course list"}
 
     # Render the response and send it back!
-    return render(request, 'courses/index.html', context_dict
-
+    return render(request, 'courses/index.html', context_dict)
+	
+	
+	
 def add_course(request):
-    # A HTTP POST?
     if request.method == 'POST':
-		form = CourseForm(request.POST)
+        form = CategoryForm(request.POST)
 
         # Have we been provided with a valid form?
         if form.is_valid():
@@ -28,11 +29,12 @@ def add_course(request):
             return index(request)
         else:
             # The supplied form contained errors - just print them to the terminal.
-            print form.errors
+            print (form.errors)
     else:
         # If the request was not a POST, display the form to enter details.
-        form = CourseForm()
+        form = CategoryForm()
+    context_dict = {'form': form}
 
-    # Bad form (or form details), no form supplied...
-    # Render the form with error messages (if any).
-    return render(request, 'courses/add_course.html', {'form': form})
+    # Render the response and send it back!
+    return render(request, 'courses/add_course.html', context_dict)
+	
