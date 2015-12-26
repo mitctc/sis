@@ -17,7 +17,7 @@ def index(request):
 	
 def add_course(request):
     if request.method == 'POST':
-        form = CategoryForm(request.POST)
+        form = CourseForm(request.POST)
 
         # Have we been provided with a valid form?
         if form.is_valid():
@@ -32,7 +32,7 @@ def add_course(request):
             print (form.errors)
     else:
         # If the request was not a POST, display the form to enter details.
-        form = CategoryForm()
+        form = CourseForm()
     context_dict = {'form': form}
 
     # Render the response and send it back!
