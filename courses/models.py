@@ -28,5 +28,6 @@ class Topic(models.Model):
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
 	
+	
 	def __unicode(self):
 		return self.name 

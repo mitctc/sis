@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'courses',
+    'courses','profiles',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -101,6 +101,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+#Password hashes
+
+PASSWORD_HASHERS = (
+        'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
+'django.contrib.auth.hashers.BCryptPasswordHasher',
+'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
