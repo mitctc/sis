@@ -10,6 +10,7 @@ class Course(models.Model):
 	name = models.CharField(max_length=128)
 	views = models.IntegerField(default=0)
 	likes = models.IntegerField(default=0)
+	fees = models.DecimalField(max_digits=6, decimal_places=2)
 	slug = models.SlugField()
 	
 	def save(self, *args, **kwargs):
@@ -18,7 +19,11 @@ class Course(models.Model):
                     #self.slug = slugify(self.name)
 			self.slug = slugify(self.name)
 			super(Course, self).save(*args, **kwargs)
-
+	
+	@property
+	def fees(self):
+		return "Rs.%s" % self.fees
+	
 	def __unicode__(self):
 		return self.name
 
