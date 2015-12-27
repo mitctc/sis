@@ -29,11 +29,3 @@ class PracticalSession(models.Model):
 	activity = models.ForeignKey(Activity)
 	
 
-class TheoryAttendance (models.Model):
-	theory = models.OneToOneField(TheorySession)
-
-class PracticalAttendance (models.Model):
-	practical = models.OneToOneField(PracticalSession)
-
-class LabAttendance  (models.Model):
-	practical = models.OneToOneField(LabSession)
