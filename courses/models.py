@@ -1,6 +1,6 @@
 from __future__ import unicode_literals
 from django.template.defaultfilters import slugify
-
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -28,6 +28,14 @@ class Topic(models.Model):
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
 	
+	
+	def __unicode(self):
+		return self.name 
+		
+class CourseGroup(models.Model):
+	course = models.ForeignKey(Course)
+	user = models.ForeignKey(User)
+	name = name = models.CharField(max_length=128)
 	
 	def __unicode(self):
 		return self.name 
