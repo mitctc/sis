@@ -17,3 +17,4 @@ class Performance (models.Model):
 
 	user = models.OneToOneField(User)
 	models.ForeignKey(Activity)
+	marks = models.IntegerField(default= 0)

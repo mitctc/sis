@@ -10,7 +10,7 @@ class Course(models.Model):
 	name = models.CharField(max_length=128)
 	views = models.IntegerField(default=0)
 	likes = models.IntegerField(default=0)
-	fees = models.DecimalField(max_digits=6, decimal_places=2,default=0.00)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
 	slug = models.SlugField()
 	
@@ -31,25 +31,19 @@ class Topic(models.Model):
 	course = models.ForeignKey(Course)
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
-	fees = models.DecimalField(max_digits=6, decimal_places=2,default=0.00)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
 	
 	def __unicode(self):
 		return self.name 
 		
-class CourseGroup(models.Model):
-	course = models.ForeignKey(Course)
-	user = models.ForeignKey(User)
-	name = name = models.CharField(max_length=128)
-	
-	def __unicode(self):
-		return self.name 
+
 
 class Lesson(models.Model):
 	topic = models.ForeignKey(Topic)
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
-	fees = models.DecimalField(max_digits=6, decimal_places=2,default=0.00)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
 	
 	def __unicode(self):
@@ -59,7 +53,7 @@ class Activity(models.Model):
 	leson = models.ForeignKey(Lesson)
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
-	fees = models.DecimalField(max_digits=6, decimal_places=2,default=0.00)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
 	
 	def __unicode(self):
