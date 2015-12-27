@@ -17,3 +17,4 @@ class PracticalSession(models.Model):
 	
 	user = models.ForeignKey(User)
 	course_group = models.ForeignKey(CourseGroup)
+	
