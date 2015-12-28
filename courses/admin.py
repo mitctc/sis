@@ -7,6 +7,7 @@ class CourseAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('name',)}
 	list_display = ('name', )
 	
+	
 class CourseModuleAdmin(admin.ModelAdmin):
 	prepopulated_fields = {'slug':('name',)}
 	list_display = ('name', )

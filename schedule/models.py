@@ -8,8 +8,7 @@ from datetime import datetime
 # Theory Session table create 
 # have relationship between course groups table and 
 class CourseGroup(models.Model):
-	course = models.ForeignKey(Course)
-	user = models.ForeignKey(User)
+	course = models.OneToOneField(Course)
 	name = name = models.CharField(max_length=128)
 	
 	def __unicode(self):

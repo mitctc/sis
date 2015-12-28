@@ -18,13 +18,11 @@ class Course(models.Model):
             # Uncomment if you don't want the slug to change every time the name changes
             #if self.id is None:
                     #self.slug = slugify(self.name)
-			self.slug = slugify(self.name)
-			super(Course, self).save(*args, **kwargs)
-	
-
-	
+		self.slug = slugify(self.name)
+		super(Course, self).save(*args, **kwargs)
+		
 	def __unicode__(self):
-		return self.name
+		return self.code
 
 class CourseModule(models.Model):
 	code = models.CharField(max_length=10,unique=True)
@@ -36,6 +34,11 @@ class CourseModule(models.Model):
 	duration = models.IntegerField(default=0)
 	slug = models.SlugField()
 	
+	
+	def __unicode__ (self):
+		return self.name
+		
+		
 	def save(self, *args, **kwargs):
             # Uncomment if you don't want the slug to change every time the name changes
             #if self.id is None:
@@ -45,14 +48,15 @@ class CourseModule(models.Model):
 	
 
 	
-	def __unicode__(self):
-		return self.name
+	
+		
 class Topic(models.Model):
 	course_module = models.ForeignKey(CourseModule)
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
+	objectives = models.TextField()
 	
 	def __unicode(self):
 		return self.name 
