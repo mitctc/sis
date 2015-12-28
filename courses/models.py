@@ -26,9 +26,29 @@ class Course(models.Model):
 	def __unicode__(self):
 		return self.name
 
-		
-class Topic(models.Model):
+class CourseModule(models.Model):
+	code = models.CharField(max_length=10,unique=True)
 	course = models.ForeignKey(Course)
+	name = models.CharField(max_length=128)
+	views = models.IntegerField(default=0)
+	likes = models.IntegerField(default=0)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
+	duration = models.IntegerField(default=0)
+	slug = models.SlugField()
+	
+	def save(self, *args, **kwargs):
+            # Uncomment if you don't want the slug to change every time the name changes
+            #if self.id is None:
+                    #self.slug = slugify(self.name)
+			self.slug = slugify(self.name)
+			super(CourseModule, self).save(*args, **kwargs)
+	
+
+	
+	def __unicode__(self):
+		return self.name
+class Topic(models.Model):
+	course_module = models.ForeignKey(CourseModule)
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
@@ -50,11 +70,20 @@ class Lesson(models.Model):
 		return self.name 
 		
 class Activity(models.Model):
+	GENRE_CHOICES =  (
+             ('de', 'Demostration'),
+             ('pr', 'Presentation'),
+             ('ex', 'Exercise'),
+             ('as', 'Assignment'),
+             ('pr', 'Project'),
+             ('db', 'Debate'), 
+             ('qu', 'Questining'),    
+             )
 	leson = models.ForeignKey(Lesson)
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
-	
+	activity_type = models.CharField(max_length=15,choices=GENRE_CHOICES)
 	def __unicode(self):
 		return self.name 

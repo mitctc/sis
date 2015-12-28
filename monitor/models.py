@@ -16,5 +16,5 @@ class LabAttendance  (models.Model):
 class Performance (models.Model):
 
 	user = models.OneToOneField(User)
-	models.ForeignKey(Activity)
+	activity = models.ForeignKey(Activity)
 	marks = models.IntegerField(default= 0)

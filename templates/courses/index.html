@@ -1,10 +1,25 @@
-<html>
-	<head>
-	</head>
-	
-	<body>
-	<h1> Course Page </h1>
-	
-	</body>
-	
-</html>
+
+{# Load the tag library #}
+{% load bootstrap3 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+{# Display a form #}
+<ul class="nav nav-pills">
+  <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Dropdown
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+      <!-- links -->
+    </ul>
+  </li>
+</ul>
