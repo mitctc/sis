@@ -1,17 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render,render_to_response
 from courses.forms import CourseForm, TopicForm
-
+from courses.models import Course
 # Create your views here.
-def index(request):
-    # Query the database for a list of ALL categories currently stored.
-    # Order the categories by no. likes in descending order.
-    # Retrieve the top 5 only - or all if less than 5.
-    # Place the list in our context_dict dictionary which will be passed to the template engine.
-    #category_list = Category.objects.order_by('-likes')[:5]
-    context_dict = {'categories': "course list"}
+def index(request): #Define our function, accept a request
+ 
+    items = Course.objects.all() #ORM queries the database for all of the to-do entries.
+ 
+    return render_to_response('courses\index.html', {'items': items}) #Responds with passing the object items (contains info from the DB) to the template index.html
 
-    # Render the response and send it back!
-    return render(request, 'courses/index.html', context_dict)
+
 	
 	
 	
