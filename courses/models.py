@@ -20,15 +20,12 @@ class Course(models.Model):
                     #self.slug = slugify(self.name)
 			self.slug = slugify(self.name)
 			super(Course, self).save(*args, **kwargs)
-	
-
-	
-	def __unicode__(self):
-		return self.name
+	def __str__(self):
+		return  self.name
 
 class CourseModule(models.Model):
-	code = models.CharField(max_length=10,unique=True)
 	course = models.ForeignKey(Course)
+	code = models.CharField(max_length=10,unique=True)
 	name = models.CharField(max_length=128)
 	views = models.IntegerField(default=0)
 	likes = models.IntegerField(default=0)
@@ -45,8 +42,9 @@ class CourseModule(models.Model):
 	
 
 	
-	def __unicode__(self):
+	def __str__(self):
 		return self.name
+
 class Topic(models.Model):
 	course_module = models.ForeignKey(CourseModule)
 	code = models.CharField(max_length=5,unique=True)
@@ -54,7 +52,7 @@ class Topic(models.Model):
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
 	
-	def __unicode(self):
+	def __str__(self):
 		return self.name 
 		
 
@@ -66,7 +64,7 @@ class Lesson(models.Model):
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
 	
-	def __unicode(self):
+	def __str__(self):
 		return self.name 
 		
 class Activity(models.Model):
@@ -85,5 +83,11 @@ class Activity(models.Model):
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	duration = models.IntegerField(default=0)
 	activity_type = models.CharField(max_length=15,choices=GENRE_CHOICES)
-	def __unicode(self):
+	
+	def __str__(self):
 		return self.name 
+
+class Teachers_Diary(models.Model):
+	activity = models.ForeignKey(Activity)
+	course_completed = models.BooleanField()
+	

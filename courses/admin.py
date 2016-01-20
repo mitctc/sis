@@ -1,5 +1,5 @@
 from django.contrib import admin
-from courses.models import Course , Topic,Lesson,Activity,CourseModule
+from courses.models import Course , Topic,Lesson,Activity,CourseModule,Teachers_Diary
 
 
 # Add in this class to customized the Admin Interface
@@ -14,7 +14,8 @@ class CourseModuleAdmin(admin.ModelAdmin):
 class TopicAdmin(admin.ModelAdmin):
 	list_display = ('name', )
 	
-
+class Teachers_DiaryAdmin(admin.ModelAdmin):
+	list_display = ("activity",)
 	
 class LessonAdmin(admin.ModelAdmin):
 	list_display = ('name', )
@@ -28,4 +29,4 @@ admin.site.register(CourseModule, CourseModuleAdmin)
 admin.site.register(Topic,TopicAdmin)
 admin.site.register(Lesson,LessonAdmin)
 admin.site.register(Activity,ActivityAdmin)
-
+admin.site.register(Teachers_Diary,Teachers_DiaryAdmin)
