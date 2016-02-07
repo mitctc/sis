@@ -1,0 +1,96 @@
+from __future__ import unicode_literals
+from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
+from django.db import models
+
+# This model create a course class whcich is define all course here 
+
+class Course(models.Model):
+	code = models.CharField(max_length=10,unique=True) # course code unique code to identify course 
+	name = models.CharField(max_length=128) # course name 
+	views = models.IntegerField(default=0) # course views will counter here
+	likes = models.IntegerField(default=0) # likes 
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00) # course Fees 
+	duration = models.IntegerField(default=0)  # course duration 
+	slug = models.SlugField() # this will crate human readable way to access words 
+	
+	def save(self, *args, **kwargs):
+            # Uncomment if you don't want the slug to change every time the name changes
+            #if self.id is None:
+                    #self.slug = slugify(self.name)
+			self.slug = slugify(self.name)
+			super(Course, self).save(*args, **kwargs)
+	def __str__(self):
+		return  self.name
+
+# This model define all module need for each and every course
+class CourseModule(models.Model):
+	course = models.ForeignKey(Course)
+	code = models.CharField(max_length=10,unique=True)
+	name = models.CharField(max_length=128)
+	views = models.IntegerField(default=0)
+	likes = models.IntegerField(default=0)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
+	duration = models.IntegerField(default=0)
+	slug = models.SlugField()
+	
+	def save(self, *args, **kwargs):
+            # Uncomment if you don't want the slug to change every time the name changes
+            #if self.id is None:
+                    #self.slug = slugify(self.name)
+			self.slug = slugify(self.name)
+			super(CourseModule, self).save(*args, **kwargs)
+	
+
+	
+	def __str__(self):
+		return self.name
+
+# This is a model which will registed all topics for one course 
+
+class Topic(models.Model):
+	course_module = models.ForeignKey(CourseModule)
+	code = models.CharField(max_length=5,unique=True)
+	name = models.CharField(max_length=128)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
+	duration = models.IntegerField(default=0)
+	
+	def __str__(self):
+		return self.name 
+		
+
+# This modal define all lessons need for this 
+class Lesson(models.Model):
+	topic = models.ForeignKey(Topic)
+	code = models.CharField(max_length=5,unique=True)
+	name = models.CharField(max_length=128)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
+	duration = models.IntegerField(default=0)
+	
+	def __str__(self):
+		return self.name 
+
+# This define all activities need for the course 
+class Activity(models.Model):
+	GENRE_CHOICES =  (
+             ('de', 'Demostration'),
+             ('pr', 'Presentation'),
+             ('ex', 'Exercise'),
+             ('as', 'Assignment'),
+             ('pr', 'Project'),
+             ('db', 'Debate'), 
+             ('qu', 'Questining'),    
+             )
+	leson = models.ForeignKey(Lesson)
+	code = models.CharField(max_length=5,unique=True)
+	name = models.CharField(max_length=128)
+	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
+	duration = models.IntegerField(default=0)
+	activity_type = models.CharField(max_length=15,choices=GENRE_CHOICES)
+	
+	def __str__(self):
+		return self.name 
+# each and Every course need a log from teacher that will define teachers log book 
+class Teachers_Diary(models.Model):
+	activity = models.ForeignKey(Activity)
+	course_completed = models.BooleanField()
