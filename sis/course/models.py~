@@ -13,10 +13,6 @@ class Course(models.Model):
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
 	theory_hrs= models.IntegerField(default=0)
 	practical_hrs = models.IntegerField(default=0)
-	course_creator = models.ForeignKey(User)
-  	created_at = models.DateTimeField(auto_now_add=True)
-    	updated_at = models.DateTimeField(auto_now=True)
-	
 	slug = models.SlugField()
 	
 	def save(self, *args, **kwargs):
@@ -102,13 +98,8 @@ class CourseGroup(models.Model):
 	name = models.CharField(max_length=128)
 	student = models.ManyToManyField(User, related_name="student")
   	teacher = models.ForeignKey(User)
-  	
-  	def __str__(self):
-		return self.name 
 
 class Teachers_Diary(models.Model):
 	activity = models.ForeignKey(Activity)
-	coursegroup = models.ForeignKey(CourseGroup)
-        completed = models.BooleanField()
-	
+	completed = models.BooleanField()
 	

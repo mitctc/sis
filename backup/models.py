@@ -1,4 +1,3 @@
-
 from __future__ import unicode_literals
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
@@ -12,7 +11,8 @@ class Course(models.Model):
 	views = models.IntegerField(default=0)
 	likes = models.IntegerField(default=0)
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
-	duration = models.IntegerField(default=0)
+	theory_hrs= models.IntegerField(default=0)
+	practical_hrs = models.IntegerField(default=0)
 	slug = models.SlugField()
 	
 	def save(self, *args, **kwargs):
@@ -31,7 +31,8 @@ class CourseModule(models.Model):
 	views = models.IntegerField(default=0)
 	likes = models.IntegerField(default=0)
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
-	duration = models.IntegerField(default=0)
+	theory_hrs= models.IntegerField(default=0)
+	practical_hrs = models.IntegerField(default=0)
 	slug = models.SlugField()
 	
 	def save(self, *args, **kwargs):
@@ -51,7 +52,8 @@ class Topic(models.Model):
 	code = models.CharField(max_length=5,unique=True)
 	name = models.CharField(max_length=128)
 	fees = models.DecimalField(max_digits=16, decimal_places=2,default=0.00)
-	duration = models.IntegerField(default=0)
+	theory_hrs= models.IntegerField(default=0)
+	practical_hrs = models.IntegerField(default=0)
 	
 	def __str__(self):
 		return self.name 
